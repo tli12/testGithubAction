@@ -1,4 +1,4 @@
-#! /usr/env python
+#! /usr/env/bin python
 
 # content of test_sample.py
 def inc(x):
