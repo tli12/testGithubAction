@@ -50,5 +50,5 @@ jobs:
           # first in Heroku online account: account -> Account Settings -> API Key. copy it.
           # then in your project's repository on GitHub, Settings -> Secrets -> actions -> New repository secret: Then enter HEROKU_API_KEY as the name and paste the copied API Key as the value.
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: "testGithubAction" #Must be unique in Heroku
+          heroku_app_name: "test-github-action" #Must be unique in Heroku
           heroku_email: "liting0612@gmail.com"
