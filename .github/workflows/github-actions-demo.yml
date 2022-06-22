@@ -31,6 +31,8 @@ jobs:
     - name: SonarCloud Scan
       uses: sonarsource/sonarcloud-github-action@master
       env:
+        # Automatic token authentication, Provided by Github. No need to do anything. https://docs.github.com/en/actions/security-guides/automatic-token-authentication
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        # First generate a token in SonarCloud account (not project): Security -> Tokens. Then in GitHub project, Settings -> Secrets -> actions -> New repository secret: set the SONAR_TOKEN environment variable
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         
