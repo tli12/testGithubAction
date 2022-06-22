@@ -18,6 +18,7 @@ jobs:
           pip install pytest-cov
           pytest tests.py 
   # https://github.com/SonarSource/sonarcloud-github-action
+  # "You are running CI analysis while Automatic Analysis is enabled. Please consider disabling one or the other." Solution: Turn off: sonarcloud -> github project -> adminstration -> Analysis Method -> SonarCloud Automatic Analysis
   sonarcloud:
     runs-on: ubuntu-latest
     steps:
