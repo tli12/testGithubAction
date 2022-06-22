@@ -1,8 +1,8 @@
 name: test and build Python
 on: [push]
 jobs:
-  # set up interpreter and install dependencies, run the test
-  Explore-GitHub-Actions:
+  # job 1. set up interpreter and install dependencies, run the test
+  Run-Test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -18,19 +18,19 @@ jobs:
           pip install pytest
           pip install pytest-cov
           pytest tests.py 
-  # scan your code with SonarCloud to detects bugs, vulnerabilities and code smells
+  # job 2. scan your code with SonarCloud to detects bugs, vulnerabilities and code smells
   # https://github.com/SonarSource/sonarcloud-github-action
   # "You are running CI analysis while Automatic Analysis is enabled. Please consider disabling one or the other." 
   # Solution: Turn off: sonarcloud -> github project -> adminstration -> Analysis Method -> SonarCloud Automatic Analysis
   # c.f. https://community.sonarsource.com/t/sonarcloud-task-fails-because-of-ci-analysis-and-auto-analysis-running/22937/4
-  sonarcloud:
+  Scan-Code-by-SonarCloud:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
       with:
         # Disabling shallow clone is recommended for improving relevancy of reporting
         fetch-depth: 0
-      # installSonarCloud: https://github.com/marketplace/actions/sonarcloud-scan
+      # install SonarCloud: https://github.com/marketplace/actions/sonarcloud-scan
     - name: SonarCloud Scan
       uses: sonarsource/sonarcloud-github-action@master
       env:
@@ -38,4 +38,14 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         # First generate a token in SonarCloud account (not project): Security -> Tokens. Then in GitHub project, Settings -> Secrets -> actions -> New repository secret: set the SONAR_TOKEN environment variable
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        
+  # job 3: deploy to Heroku
+  Deploy-to-Heroku:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      # install Heroku: https://github.com/marketplace/actions/deploy-to-heroku
+      - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: "YOUR APP's NAME" #Must be unique in Heroku
+          heroku_email: "YOUR EMAIL"
