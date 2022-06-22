@@ -36,9 +36,10 @@ jobs:
       env:
         # Automatic token authentication, Provided by Github. No need to do anything. https://docs.github.com/en/actions/security-guides/automatic-token-authentication
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        # First generate a token in SonarCloud account (not project): Security -> Tokens. Then in GitHub project, Settings -> Secrets -> actions -> New repository secret: set the SONAR_TOKEN environment variable
+        # First generate a token in SonarCloud account (not project): Security -> Tokens. 
+        # Then in GitHub project, Settings -> Secrets -> actions -> New repository secret: set the SONAR_TOKEN environment variable
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-  # job 3: deploy to Heroku
+  # job 3: deploy to Heroku https://github.com/marketplace/actions/deploy-to-heroku
   Deploy-to-Heroku:
     runs-on: ubuntu-latest
     steps:
@@ -46,6 +47,8 @@ jobs:
       # install Heroku: https://github.com/marketplace/actions/deploy-to-heroku
       - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
         with:
+          # first in Heroku online account: account -> Account Settings -> API Key. copy it.
+          # then in your project's repository on GitHub, Settings -> Secrets -> actions -> New repository secret: Then enter HEROKU_API_KEY as the name and paste the copied API Key as the value.
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "testGithubAction" #Must be unique in Heroku
           heroku_email: "liting0612@gmail.com"
