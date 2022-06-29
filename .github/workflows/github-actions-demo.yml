@@ -40,6 +40,9 @@ jobs:
         # Then in GitHub project, Settings -> Secrets -> actions -> New repository secret: set the SONAR_TOKEN environment variable
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
   # job 3: deploy to Heroku https://github.com/marketplace/actions/deploy-to-heroku
+  # need to have some file in the root directory of the repository for Heroko to detect which pl the project is in.
+  # for Python, 
+  # need requirements.txt at the root directory of the repo, to specify the dependencies. https://stackoverflow.com/a/72768064. No need to specify the version of each dependency
   Deploy-to-Heroku:
     runs-on: ubuntu-latest
     steps:
