@@ -40,9 +40,11 @@ jobs:
         # Then in GitHub project, Settings -> Secrets -> actions -> New repository secret: set the SONAR_TOKEN environment variable
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
   # job 3: deploy to Heroku https://github.com/marketplace/actions/deploy-to-heroku
-  # need to have some file in the root directory of the repository for Heroko to detect which pl the project is in.
-  # for Python, 
-  # need requirements.txt at the root directory of the repo, to specify the dependencies. https://stackoverflow.com/a/72768064. No need to specify the version of each dependency
+  # need to have some file in the root directory of the repository, s.t. after deployed to Heroku, Heroko can detect which pl the project is in and run the program in it. Otherwise Heroka will "No default language could be detected for this app" during deployment attempt.
+  # for Python,  https://elements.heroku.com/buildpacks/heroku/heroku-buildpack-python,  https://stackoverflow.com/a/72768064, https://stackoverflow.com/a/43472063
+  # - requirements.txt: specify the dependencies, where no need to specify the version of each dependency. needed at the root directory of the repo. https://stackoverflow.com/questions/55052434/does-python-requirements-file-have-to-specify-version https://learnpython.com/blog/python-requirements-file/ https://pip.pypa.io/en/stable/user_guide/#requirements-files
+  # - runtime.txt: version of python interpreter. optional, if omitted, using default version of Python. https://stackoverflow.com/questions/61492883/python-runtime-txt-to-specify-the-python-runtime-version
+  # - Procfile: web server, if the repo is a web application?  https://stackoverflow.com/a/43472063
   Deploy-to-Heroku:
     runs-on: ubuntu-latest
     steps:
