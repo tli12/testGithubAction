@@ -45,6 +45,7 @@ jobs:
   # - requirements.txt: specify the dependencies, where no need to specify the version of each dependency. needed at the root directory of the repo. https://stackoverflow.com/questions/55052434/does-python-requirements-file-have-to-specify-version https://learnpython.com/blog/python-requirements-file/ https://pip.pypa.io/en/stable/user_guide/#requirements-files
   # - runtime.txt: version of python interpreter. optional, if omitted, using default version of Python. https://stackoverflow.com/questions/61492883/python-runtime-txt-to-specify-the-python-runtime-version
   # - Procfile: web server, if the repo is a web application?  https://stackoverflow.com/a/43472063
+  # Heroku will install the necessary things in the three files, in the deployment environment.
   Deploy-to-Heroku:
     runs-on: ubuntu-latest
     steps:
